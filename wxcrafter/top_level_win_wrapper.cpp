@@ -163,11 +163,11 @@ void TopLevelWinWrapper::GenerateCode(const wxcProjectMetadata& project, bool pr
         ctorBody << "    SetName(" << wxCrafter::WXT(GetName()) << ");\n";
         wxSize sz = wxCrafter::DecodeSize(PropertyString(PROP_MINSIZE));
         if(sz != wxDefaultSize) {
-            ctorBody << wxT("    SetMinClientSize(wxSize(" << wxCrafter::EncodeSize(sz) << "));\n");
+            ctorBody << wxT("    SetMinClientSize(WXC_FROM_DIP(wxSize(" << wxCrafter::EncodeSize(sz) << ")));\n");
         }
 
         if(GetType() != ID_WXAUITOOLBARTOPLEVEL) {
-            ctorBody << "    SetSize(" << wxCrafter::GetSizeAsDlgUnits(GetSize(), "this") << wxT(");\n");
+            ctorBody << "    SetSize(WXC_FROM_DIP(" << wxCrafter::GetSizeAsDlgUnits(GetSize(), "this") << wxT("));\n");
             ctorBody << "    if (GetSizer()) {\n";
             ctorBody << "         GetSizer()->Fit(this);\n";
             ctorBody << "    }\n";
