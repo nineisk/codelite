@@ -796,6 +796,7 @@ void wxCrafter::WriteFile(const wxFileName& filename, const wxString& content, b
 
     wxFFile fp(filename.GetFullPath(), wxT("w+b"));
     if(fp.IsOpened()) {
+        fp.Write("\xEF\xBB\xBF",3);
         fp.Write(content, wxConvUTF8);
         fp.Close();
     }
